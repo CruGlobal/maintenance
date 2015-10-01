@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Maintenance Flipper</title>
+    <link href='//fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div id="container">
+      <h1><%= image_tag "maintenance.gif", :alt => "Maintenance" %></h1>
+      <%= yield %>
+    </div>
+  </body>
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <%= javascript_include_tag "application" %>
+
+  <script type="text/javascript">
+    $(function() {
+      <%= yield :onready %>
+    });
+  </script>
+</html>

@@ -1,0 +1,31 @@
+<header class="app-header">
+  <h2><%= app.name %></h2>
+
+  <nav>
+    <%= form_tag app_path(app.name), method: :delete do %>
+      <button>remove</button>
+    <% end %>
+  </nav>
+</header>
+
+<div class="col">
+  <%= form_tag app_path(app.name), :class => "maintenance_form", :method => :put, :remote => true do %>
+    <label>Maintenance Mode</label>
+    <input name="maintenance" type="hidden" value="0" />
+    <%= check_box_tag('maintenance', '1', app.maintenance, class: 'maintenance') %>
+  <% end %>
+</div>
+
+<div class="col">
+  <%= form_tag app_path(app.name), :class => "dependencies_form", :method => :put, :remote => true do %>
+    <label>Dependent systems</label>
+    <select id="<%= app.name %>_dependencies" class="dependencies" name="dependencies[]" multiple="multiple" data-placeholder="Choose a dependency">
+      <% (@index.apps - [app.name.to_s]).each do |dependency| %>
+        <option<%= " selected='selected'" if app.dependencies.include?(dependency) %>><%= dependency %></option>
+      <% end %>
+    </select>
+    <%= hidden_field_tag "dependencies[]", "" %>
+    <input type="submit" value="Save" />
+  <% end %>
+</div>
+

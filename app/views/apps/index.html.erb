@@ -1,0 +1,20 @@
+<ul id="apps">
+  <% @apps.each do |app| %>
+    <li id="<%= app.name %>" class="app clearfix"><%= render 'app', :app => app %></li>
+  <% end %>
+</ul>
+
+<div class="add-app">
+  <%= form_tag apps_path do %>
+    <input name="name" placeholder="app_name"></input>
+    <button>Add App</button>
+  <% end %>
+</div>
+
+<% content_for :onready do %>
+  $("select").chosen({no_results_text: "No dependencies matched"});
+
+  $("select, input.maintenance").change(function() {
+    $(this).closest("form").submit();
+  });
+<% end %>
