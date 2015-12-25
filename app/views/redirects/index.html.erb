@@ -1,0 +1,26 @@
+<ul id="apps">
+  <% @redirects.each do |redirect| %>
+    <li id="<%= redirect.domain %>" class="app clearfix"><%= render 'redirect', :redirect => redirect %></li>
+  <% end %>
+</ul>
+
+<div class="add-app">
+  <%= form_tag redirects_path do %>
+    <input name="domain" placeholder="from domain" />
+    <input name="to" placeholder="target url" />
+    <select class="cert" name="cert" data-placeholder="Choose a cert">
+      <% Cert.all.each do |cert| %>
+        <option><%= cert.name %></option>
+      <% end %>
+    </select>
+    <button>Add Redirect</button>
+  <% end %>
+</div>
+
+<% content_for :onready do %>
+  $("select.cert").chosen({no_results_text: "No certs matched"});
+
+  $(".cert_form select").change(function() {
+    $(this).closest("form").submit();
+  });
+<% end %>

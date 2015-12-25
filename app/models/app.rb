@@ -40,15 +40,14 @@ class App
     redis.get(maintenance_key)
   end
 
-
   private
 
   def maintenance_key
-    "#{name}:maintenance"
+    "maintenance:#{name}:maintenance"
   end
 
   def dependencies_key
-    "#{name}:dependencies"
+    "maintenance:#{name}:dependencies"
   end
 
   def update_dependencies

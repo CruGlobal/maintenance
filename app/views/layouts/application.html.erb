@@ -10,6 +10,11 @@
   <body>
     <div id="container">
       <h1><%= image_tag "maintenance.gif", :alt => "Maintenance" %></h1>
+      <div id="nav">
+        <%= link_to_unless(params[:controller] == 'apps', 'Maintenance', '/') %> |
+        <%= link_to_unless(params[:controller] == 'redirects', 'Redirect Rules', redirects_path) %> |
+        <%= link_to_unless(params[:controller] == 'certs', 'Certs', certs_path) %> |
+      </div>
       <%= yield %>
     </div>
   </body>

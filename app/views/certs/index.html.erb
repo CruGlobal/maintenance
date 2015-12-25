@@ -1,0 +1,14 @@
+<ul id="apps">
+  <% @certs.each do |cert| %>
+    <li id="<%= cert.name %>" class="app clearfix"><%= render 'cert', :cert => cert %></li>
+  <% end %>
+</ul>
+
+<div class="add-app">
+  <%= form_tag certs_path do %>
+    <input name="name" placeholder="Cert name" />
+    <textarea name="key" placeholder="Private Key"></textarea>
+    <textarea name="cert" placeholder="Certificate (including chain)"></textarea>
+    <button>Add Cert</button>
+  <% end %>
+</div>

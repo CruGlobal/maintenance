@@ -1,0 +1,23 @@
+<header class="app-header">
+  <h3><%= cert.name %></h3>
+
+  <nav>
+    <%= form_tag cert_path(cert.name), method: :delete do %>
+      <button>remove</button>
+    <% end %>
+  </nav>
+</header>
+
+<%= form_tag cert_path(cert.name), :class => "cert_form", :method => :put, :remote => true do %>
+  <div class="col">
+    <label>Private Key</label>
+    <%= text_area_tag('key', cert.key, class: 'key') %>
+  </div>
+  <div class="col">
+    <label>Certificate</label>
+    <%= text_area_tag('cert', cert.cert, class: 'cert') %>
+  </div>
+  <div class="col">
+    <%= submit_tag('Save') %>
+  </div>
+<% end %>

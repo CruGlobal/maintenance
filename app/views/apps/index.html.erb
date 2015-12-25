@@ -6,13 +6,13 @@
 
 <div class="add-app">
   <%= form_tag apps_path do %>
-    <input name="name" placeholder="app_name"></input>
+    <input name="name" placeholder="App name" />
     <button>Add App</button>
   <% end %>
 </div>
 
 <% content_for :onready do %>
-  $("select").chosen({no_results_text: "No dependencies matched"});
+  $("select.dependencies").chosen({no_results_text: "No dependencies matched"});
 
   $("select, input.maintenance").change(function() {
     $(this).closest("form").submit();

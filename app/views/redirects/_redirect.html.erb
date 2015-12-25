@@ -1,0 +1,20 @@
+<header class="app-header">
+  <h3><span class="val"><%= redirect.domain %></span> => <span class="val"><%= redirect.to %></span></h3>
+
+  <nav>
+    <%= form_tag redirect_path(Base64.encode64(redirect.domain)), method: :delete do %>
+      <button>remove</button>
+    <% end %>
+  </nav>
+</header>
+<div class="col">
+  <%= form_tag redirect_path(Base64.encode64(redirect.domain)), :class => "cert_form", :method => :put, :remote => true do %>
+    <label>Cert</label>
+    <select id="<%= redirect.domain %>_cert" class="cert" name="cert" data-placeholder="Choose a cert">
+      <% Cert.all.each do |cert| %>
+        <option<%= " selected='selected'" if redirect.cert == cert.name %>><%= cert.name %></option>
+      <% end %>
+    </select>
+  <% end %>
+</div>
+

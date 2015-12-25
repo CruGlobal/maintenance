@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -58,6 +59,7 @@ GEM
     execjs (2.6.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hashie (3.4.3)
     i18n (0.7.0)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
@@ -74,6 +76,14 @@ GEM
     minitest (5.8.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
+    omniauth-cas (1.1.0)
+      addressable (~> 2.3)
+      nokogiri (~> 1.5)
+      omniauth (~> 1.2.0)
+    pg (0.18.4)
     pry (0.10.2)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -111,8 +121,6 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
     redis (3.2.1)
-    redis-namespace (1.5.2)
-      redis (~> 3.0, >= 3.0.4)
     sass (3.4.18)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -156,10 +164,12 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   dotenv-rails
   jquery-rails
+  omniauth-cas
+  pg
   pry-rails
   puma
   rails (= 4.2.4)
-  redis-namespace
+  redis
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   silencer

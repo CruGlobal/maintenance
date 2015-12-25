@@ -9,15 +9,15 @@ class Index
   end
 
   def add_app(app)
-    redis.sadd(:apps, app)
+    redis.sadd('maintenance:apps', app)
   end
 
   def remove_app(app)
-    redis.srem(:apps, app)
+    redis.srem('maintenance:apps', app)
   end
 
   def apps
-    apps = redis.smembers(:apps)
+    apps = redis.smembers('maintenance:apps')
     apps ? apps.sort : []
   end
 end
