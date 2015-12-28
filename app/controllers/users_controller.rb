@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate, only: [:no_access]
   def index
-    @users = User.all
+    @users = User.order('has_access desc, last_name, first_name')
   end
 
   def update
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    user.destroy
+    # user.destroy
 
     redirect_to users_path
   end

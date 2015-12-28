@@ -1,21 +1,23 @@
 <header class="app-header">
-  <h3><%= user.name %></h3>
+  <h3><%= user.name %> - <%= user.username %></h3>
 
-  <nav>
-    <%= form_tag user_path(user.name), method: :delete do %>
-      <button>remove</button>
-    <% end %>
-  </nav>
+  <% unless user == current_user %>
+    <nav>
+      <%= form_tag user_path(user), method: :delete, data: { confirm: "Are you sure you want to remove #{user.first_name}" } do %>
+        <button>remove</button>
+      <% end %>
+    </nav>
+  <% end %>
 </header>
 
 <%= form_tag user_path(user), :class => "user_form", :method => :put, :remote => true do %>
   <div class="col">
-      <label>Has Access?</label>
-      <% if user == current_user %>
-        It's you!
-      <% else %>
-        <input name="has_access" type="hidden" value="0" />
-        <%= check_box_tag('has_access', '1', user.has_access?, class: 'has_access') %>
-      <% end %>
+    <label>Has Access?</label>
+    <% if user == current_user %>
+      It's you!
+    <% else %>
+      <input name="has_access" type="hidden" value="0" />
+      <%= check_box_tag('has_access', '1', user.has_access?, class: 'has_access') %>
+    <% end %>
   </div>
 <% end %>
