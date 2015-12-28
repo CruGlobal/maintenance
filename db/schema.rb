@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222130943) do
+ActiveRecord::Schema.define(version: 20151228145814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 20151222130943) do
 
   add_index "audit_entries", ["user_id"], name: "index_audit_entries_on_user_id", using: :btree
 
+  create_table "certs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "sso_guid"
     t.string   "username"
@@ -35,6 +40,7 @@ ActiveRecord::Schema.define(version: 20151222130943) do
     t.string   "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "has_access"
   end
 
   add_foreign_key "audit_entries", "users"

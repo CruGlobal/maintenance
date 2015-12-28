@@ -1,0 +1,9 @@
+<div id="nav">
+  You don't have access to this tool. Anyone who has access can grant you access. Try asking one of the following people:
+
+  <ul>
+    <% User.where(has_access: true).each do |user| %>
+      <li><%= user.name %> - <%= mail_to(user.username) %></li>
+    <% end %>
+  </ul>
+</div>

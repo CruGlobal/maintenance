@@ -10,11 +10,15 @@ class User < ActiveRecord::Base
   end
 
   def apply_auth_hash(auth_hash)
-    self.sso_guid = auth_hash.ssoGuid
-    self.username = auth_hash.user
-    self.first_name = auth_hash.firstName
-    self.last_name = auth_hash.lastName
+    self.sso_guid = auth_hash.extra.ssoGuid
+    self.username = auth_hash.uid
+    self.first_name = auth_hash.extra.firstName
+    self.last_name = auth_hash.extra.lastName
     save!
     self
+  end
+
+  def name
+    [first_name, last_name].join(' ')
   end
 end

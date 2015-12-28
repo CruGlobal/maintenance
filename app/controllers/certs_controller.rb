@@ -19,7 +19,6 @@ class CertsController < ApplicationController
 
   def destroy
     cert = Cert.new(Base64.decode64(params[:id]))
-    raise cert.inspect
     cert.destroy
 
     redirect_to certs_path

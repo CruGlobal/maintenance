@@ -1,0 +1,11 @@
+<ul id="apps">
+  <% @users.each do |user| %>
+    <li id="<%= user.id %>" class="app clearfix"><%= render 'user', :user => user %></li>
+  <% end %>
+</ul>
+
+<% content_for :onready do %>
+  $("input.has_access").change(function() {
+    $(this).closest("form").submit();
+  });
+<% end %>
