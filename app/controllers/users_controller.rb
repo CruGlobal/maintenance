@@ -19,6 +19,6 @@ class UsersController < ApplicationController
   end
 
   def no_access
-
+    redirect_to '/' and return if current_user.has_access?
   end
 end
