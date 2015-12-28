@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  force_ssl(if: :ssl_configured?, except: :lb)
+
   before_action :authenticate
 
   def current_user=(user)
@@ -11,6 +13,11 @@ class ApplicationController < ActionController::Base
 
     @current_user ||= User.find(session[:user_id])
   end
+
+  def ssl_configured?
+    !Rails.env.development? && !Rails.env.test?
+  end
+  
   helper_method :current_user
 
   private
