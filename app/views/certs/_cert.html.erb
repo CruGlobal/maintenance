@@ -2,13 +2,14 @@
   <h3><%= cert.name %></h3>
 
   <nav>
-    <%= form_tag cert_path(cert.name), method: :delete do %>
+    <%= form_tag cert_path(Base64.encode64(cert.name)), method: :delete,
+                 data: { confirm: "Are you sure you want to remove #{cert.name}?" } do %>
       <button>remove</button>
     <% end %>
   </nav>
 </header>
 
-<%= form_tag cert_path(cert.name), :class => "cert_form", :method => :put, :remote => true do %>
+<%= form_tag cert_path(Base64.encode64(cert.name)), :class => "cert_form", :method => :put, :remote => true do %>
   <div class="col">
     <label>Private Key</label>
     <%= text_area_tag('key', cert.key, class: 'key') %>

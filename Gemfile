@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use SCSS for stylesheets
@@ -19,9 +18,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'redis'
 gem 'syslog-logger'
 gem 'puma'
-gem 'silencer'
 gem 'pg'
 gem 'omniauth-cas'
+gem 'rubocop'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -46,4 +45,3 @@ group :development do
   gem 'spring'
   gem 'dotenv-rails'
 end
-

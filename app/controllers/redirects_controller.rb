@@ -19,7 +19,6 @@ class RedirectsController < ApplicationController
 
   def destroy
     redirect = Redirect.new(Base64.decode64(params[:id]))
-            raise redirect.inspect
     redirect.destroy
 
     redirect_to redirects_path

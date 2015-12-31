@@ -1,0 +1,33 @@
+AllCops:
+  Exclude:
+    - db/**/*
+    - script/**/*
+    - vendor/**/*
+    - bin/**/*
+    - Rakefile
+    - config.ru
+
+  RunRailsCops: true
+
+Documentation:
+  Enabled: false
+
+Semicolon:
+  Enabled: false
+
+MethodLength:
+  Severity: warning
+  Max: 16
+
+Style/AndOr:
+  Enabled: false
+
+Style/Lambda:
+  Exclude:
+      - config/**/*
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/AbcSize:
+  Max: 30

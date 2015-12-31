@@ -2,14 +2,14 @@ class AppsController < ApplicationController
   before_action :initialize_index
 
   def index
-    @apps = @index.apps.map{ |app| App.new(app) }
+    @apps = @index.apps.map { |app| App.new(app) }
   end
 
   def update
     @app = App.new(params[:id])
 
-    @app.maintenance = params["maintenance"] if params["maintenance"]
-    @app.dependencies = params["dependencies"] if params["dependencies"]
+    @app.maintenance = params['maintenance'] if params['maintenance']
+    @app.dependencies = params['dependencies'] if params['dependencies']
 
     render nothing: true
   end

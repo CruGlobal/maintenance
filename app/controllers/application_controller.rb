@@ -5,30 +5,28 @@ class ApplicationController < ActionController::Base
 
   def current_user=(user)
     session[:user_id] = user.id
+    Thread.current[:user_id] = session[:user_id]
     @current_user = user
   end
 
   def current_user
     return unless session[:user_id]
 
+    Thread.current[:user_id] = session[:user_id]
     @current_user ||= User.find(session[:user_id])
   end
 
   def ssl_configured?
     !Rails.env.development? && !Rails.env.test?
   end
-  
+
   helper_method :current_user
 
   private
 
   def authenticate
-    unless current_user
-      redirect_to '/auth/cas' and return
-    end
+    redirect_to '/auth/cas' and return unless current_user
 
-    unless current_user.has_access?
-      redirect_to '/users/no_access'
-    end
+    redirect_to '/users/no_access' unless current_user.has_access?
   end
 end
