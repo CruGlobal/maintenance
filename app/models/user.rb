@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   def self.find_or_create_from_auth_hash(auth_hash)
-    existing = where(sso_guid: auth_hash.extra.ssoGuid).first
+    existing = find_by(sso_guid: auth_hash.extra.ssoGuid)
     return existing.apply_auth_hash(auth_hash) if existing
 
-    pending = where(username: auth_hash.extra.user).first
+    pending = find_by(username: auth_hash.extra.user)
     return pending.apply_auth_hash(auth_hash) if pending
 
     new.apply_auth_hash(auth_hash)

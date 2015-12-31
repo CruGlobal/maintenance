@@ -73,7 +73,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  config.logger = ActiveSupport::TaggedLogging.new(Logger::Syslog.new("maintenance-#{ENV['ENVIRONMENT']}", Syslog::LOG_LOCAL7))
-  config.log_tags = [ lambda { |request| "ReqID:#{request.uuid}" } ]
-  config.middleware.swap Rails::Rack::Logger, Silencer::Logger, config.log_tags, :silence => ['/monitors/lb']
+  config.logger = ActiveSupport::TaggedLogging.new(Logger::Syslog.new("maintenance-#{ENV['ENVIRONMENT']}",
+                                                                      Syslog::LOG_LOCAL7))
+  config.log_tags = [->(request) { "ReqID:#{request.uuid}" }]
 end

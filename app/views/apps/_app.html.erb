@@ -2,7 +2,8 @@
   <h2><%= app.name %></h2>
 
   <nav>
-    <%= form_tag app_path(app.name), method: :delete do %>
+    <%= form_tag app_path(app.name), method: :delete,
+                 data: { confirm: "Are you sure you want to remove #{app.name}?" } do %>
       <button>remove</button>
     <% end %>
   </nav>

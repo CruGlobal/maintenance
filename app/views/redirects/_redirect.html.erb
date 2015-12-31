@@ -2,7 +2,8 @@
   <h3><span class="val"><%= redirect.domain %></span> => <span class="val"><%= redirect.to %></span></h3>
 
   <nav>
-    <%= form_tag redirect_path(Base64.encode64(redirect.domain)), method: :delete do %>
+    <%= form_tag redirect_path(Base64.encode64(redirect.domain)), method: :delete,
+                 data: { confirm: "Are you sure you want to remove #{redirect.domain}?" } do %>
       <button>remove</button>
     <% end %>
   </nav>
@@ -18,3 +19,14 @@
   <% end %>
 </div>
 
+<div class="col">
+  <% if redirect.create_audit %>
+    <p>Created by <%= redirect.created_by.try(:name) %> <br /> <%= redirect.created_at %></p>
+  <% end %>
+</div>
+
+<div class="col">
+  <% if redirect.update_audit %>
+    <p>Updated by <%= redirect.updated_by.try(:name) %> <br /> <%= redirect.updated_at %></p>
+  <% end %>
+</div>

@@ -5,6 +5,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :cas, url: 'https://thekey.me/cas'
 end
 
-OmniAuth.config.on_failure = Proc.new { |env|
+OmniAuth.config.on_failure = proc { |env|
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
 }
