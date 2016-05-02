@@ -58,6 +58,34 @@ class App
     redis.get(maintenance_key)
   end
 
+  def whitelist
+    redis.smembers(whitelist_key) || []
+  end
+
+  def whitelist=(domains)
+    whitelist.each { |domain| remove_domain(domain) }
+
+    domains.reverse.each do |domain|
+      add_domain(domain) if domain.present?
+    end
+  end
+
+  def add_domain(domain)
+    redis.sadd(whitelist_key, domain)
+    AuditEntry.create!(change_type: 'add_domain',
+                       key: whitelist_key,
+                       to_value: domain,
+                       user_id: Thread.current[:user_id])
+  end
+
+  def remove_domain(domain)
+    redis.srem(whitelist_key, domain)
+    AuditEntry.create!(change_type: 'remove_domain',
+                       key: whitelist_key,
+                       from_value: domain,
+                       user_id: Thread.current[:user_id])
+  end
+
   private
 
   def maintenance_key
@@ -66,6 +94,10 @@ class App
 
   def dependencies_key
     "maintenance:#{name}:dependencies"
+  end
+
+  def whitelist_key
+    "maintenance:#{name}:whitelist"
   end
 
   def update_dependencies
