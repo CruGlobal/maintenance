@@ -12,9 +12,9 @@ class App
   end
 
   def dependencies=(deps)
-    dependencies.each { |dep| remove_dependency(dep) }
+    (dependencies.to_set - deps.to_set).each { |dep| remove_dependency(dep) }
 
-    deps.each do |dep|
+    (deps.to_set - dependencies.to_set).each do |dep|
       add_dependency(dep) if dep.present? && dep != name
     end
   end
@@ -63,9 +63,11 @@ class App
   end
 
   def whitelist=(domains)
-    whitelist.each { |domain| remove_domain(domain) }
+    # Remove existing domains missing from input
+    (whitelist.to_set - domains.to_set).each { |domain| remove_domain(domain) }
 
-    domains.reverse.each do |domain|
+    # Add new domains missing from existing domains
+    (domains.to_set - whitelist.to_set).each do |domain|
       add_domain(domain) if domain.present?
     end
   end

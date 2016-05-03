@@ -10,7 +10,7 @@ class AppsController < ApplicationController
 
     @app.maintenance = params['maintenance'] if params['maintenance']
     @app.dependencies = params['dependencies'] if params['dependencies']
-    @app.whitelist = params['whitelist'].split(',').map { |s| s.strip }.compact if params['whitelist']
+    @app.whitelist = params['whitelist'].split(',').map(&:strip).compact if params['whitelist']
 
     render nothing: true
   end
