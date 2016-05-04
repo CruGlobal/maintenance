@@ -21,6 +21,7 @@ gem 'puma'
 gem 'pg'
 gem 'omniauth-cas'
 gem 'rubocop'
+gem 'parser', '2.3.0.7'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
