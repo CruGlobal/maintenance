@@ -1,8 +1,8 @@
 <h2>Vanity Redirects</h2>
 <div>
-  <%= form_tag vanities_path do %>
-      <input name="path" placeholder="from path" />
-      <input name="target" placeholder="target path" />
+  <%= form_tag vanities_path, id: 'add_vanity_form' do %>
+      <input class="path" name="path" placeholder="from path" />
+      <input class="target" name="target" placeholder="target path" />
       <button>Add Vanity</button>
   <% end %>
 </div>
