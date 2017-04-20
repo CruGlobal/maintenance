@@ -1,0 +1,14 @@
+<h2>Regex redirect rules</h2>
+<div>
+  <%= form_tag regexes_path do %>
+      <input name="pattern" placeholder="Path Pattern" />
+      <input name="target" placeholder="Target" />
+      <button>Add Rewrite Rule</button>
+  <% end %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+      <%= render @regexes %>
+  </table>
+</div>

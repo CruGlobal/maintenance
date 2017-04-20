@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :apps, only: [:index, :create, :update, :destroy]
   resources :redirects, only: [:index, :create, :update, :destroy]
-  resources :vanities, only: [:index, :create, :update, :destroy]
+  resources :vanities, only: [:index, :create, :destroy]
+  resources :regexes, only: [:index, :create, :update, :destroy]
   resources :certs, only: [:index, :create, :update, :destroy]
   resources :users, only: [:index, :update, :destroy] do
     collection do

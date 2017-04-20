@@ -7,10 +7,10 @@
 
     <title>Maintenance Utilities</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag 'application' %>
     <%= csrf_meta_tags %>
 
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag 'application' %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
   </head>
@@ -26,11 +26,13 @@
           <li class="nav-item <%= 'active' if params[:controller] == 'apps' %>">
             <a class="nav-link" href="/">Maintenance</a>
           </li>
-          <li class="nav-item <%= 'active' if params[:controller] == 'redirects' %>">
-            <a class="nav-link" href="/redirects">Domain Redirects</a>
-          </li>
-          <li class="nav-item <%= 'active' if params[:controller] == 'vanities' %>">
-            <a class="nav-link" href="/vanities">Vanity Redirects</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Redirects</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="/redirects">Domains</a>
+              <a class="dropdown-item" href="/vanities">Vanities</a>
+              <a class="dropdown-item" href="/regexes">Regexes</a>
+            </div>
           </li>
           <li class="nav-item <%= 'active' if params[:controller] == 'certs' %>">
             <a class="nav-link" href="/certs">Certs</a>

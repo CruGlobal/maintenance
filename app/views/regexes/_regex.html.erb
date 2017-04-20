@@ -1,0 +1,10 @@
+<tr>
+  <td><%= regex.pattern %></td>
+  <td><%= regex.target %></td>
+  <td>
+    <%= form_tag regex_path(regex), method: :delete, data: { confirm: "Are you sure you want to remove #{regex.pattern}" } do %>
+        <button>remove</button>
+    <% end %>
+  </td>
+</tr>
+
