@@ -3,6 +3,6 @@ class MonitorsController < ApplicationController
   layout nil
 
   def lb
-    render text: 'OK'
+    render body: 'OK'
   end
 end
