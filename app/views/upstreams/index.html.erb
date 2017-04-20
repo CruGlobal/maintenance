@@ -1,0 +1,25 @@
+<h2>Upstreams</h2>
+<div>
+    <%= form_tag upstreams_path, id: 'add_upstream_form' do %>
+    <input class="path" name="path" placeholder="Path" />
+      <select id="new_target" class="target" name="target" data-placeholder="Choose a target">
+        <% {'Wordpress' => 'WP_ADDR'}.each do |name, constant| %>
+            <option value="<%= constant %>"><%= name %></option>
+        <% end %>
+      </select>
+      <button>Add Upstream</button>
+    <% end %>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Path</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @upstreams %>
+      </tbody>
+    </table>
+</div>

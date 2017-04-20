@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :upstreams
   resources :apps, only: [:index, :create, :update, :destroy]
   resources :redirects, only: [:index, :create, :update, :destroy]
   resources :vanities, only: [:index, :create, :destroy]
