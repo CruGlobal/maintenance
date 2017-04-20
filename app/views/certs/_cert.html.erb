@@ -1,24 +1,24 @@
-<header class="app-header">
-  <h3><%= cert.name %></h3>
-
-  <nav>
+<tr>
+  <td><%= cert.name %></td>
+  <td>
+    <%= form_tag cert_path(Base64.encode64(cert.name)), :class => "cert_form", :method => :put, :remote => true do %>
+      <label>Private Key</label>
+      <br>
+      <%= text_area_tag('key', cert.key, class: 'key') %>
+      <br>
+      <label>Certificate</label>
+      <br>
+      <%= text_area_tag('cert', cert.cert, class: 'cert') %>
+      <br>
+      <%= submit_tag('Save') %>
+    <% end %>
+  </td>
+  <td>
     <%= form_tag cert_path(Base64.encode64(cert.name)), method: :delete,
                  data: { confirm: "Are you sure you want to remove #{cert.name}?" } do %>
-      <button>remove</button>
+        <button>remove</button>
     <% end %>
-  </nav>
-</header>
+  </td>
+</tr>
 
-<%= form_tag cert_path(Base64.encode64(cert.name)), :class => "cert_form", :method => :put, :remote => true do %>
-  <div class="col">
-    <label>Private Key</label>
-    <%= text_area_tag('key', cert.key, class: 'key') %>
-  </div>
-  <div class="col">
-    <label>Certificate</label>
-    <%= text_area_tag('cert', cert.cert, class: 'cert') %>
-  </div>
-  <div class="col">
-    <%= submit_tag('Save') %>
-  </div>
-<% end %>
+

@@ -1,14 +1,17 @@
-<ul id="apps">
-  <% @apps.each do |app| %>
-    <li id="<%= app.name %>" class="app clearfix"><%= render 'app', :app => app %></li>
-  <% end %>
-</ul>
-
-<div class="add-app">
+<h2>Apps</h2>
+<div>
   <%= form_tag apps_path do %>
-    <input name="name" placeholder="App name" />
-    <button>Add App</button>
+      <input name="name" placeholder="App name" />
+      <button>Add App</button>
   <% end %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <% @apps.each do |app| %>
+      <%= render 'app', :app => app %>
+    <% end %>
+  </table>
 </div>
 
 <% content_for :onready do %>

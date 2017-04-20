@@ -48,8 +48,8 @@ class Redirect
   end
 
   def self.all
-    keys = Redis.current.keys('redirect:*').collect do |k|
-      k.sub('redirect:', '')
+    keys = Redis.current.keys('domain_redirect:*').collect do |k|
+      k.sub('domain_redirect:', '')
     end
 
     keys.sort.collect { |k| Redirect.new(k) }
@@ -84,7 +84,7 @@ class Redirect
   private
 
   def redirect_key
-    "redirect:#{domain}"
+    "domain_redirect:#{domain}"
   end
 
   def cert_key

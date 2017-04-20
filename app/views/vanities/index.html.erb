@@ -1,0 +1,21 @@
+<h2>Vanity Redirects</h2>
+<div>
+  <%= form_tag vanities_path do %>
+      <input name="path" placeholder="from path" />
+      <input name="target" placeholder="target path" />
+      <button>Add Vanity</button>
+  <% end %>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Path</th>
+        <th>Target</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @vanities %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,10 @@
+<tr>
+  <td><%= vanity.path %></td>
+  <td><%= vanity.target %></td>
+  <td>
+    <%= form_tag vanity_path(Base64.encode64(vanity.path)), method: :delete,
+                       data: { confirm: "Are you sure you want to remove #{vanity.path}?" } do %>
+        <button>remove</button>
+    <% end %>
+  </td>
+</tr>

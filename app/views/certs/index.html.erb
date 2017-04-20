@@ -1,14 +1,25 @@
-<ul id="apps">
-  <% @certs.each do |cert| %>
-    <li id="<%= cert.name %>" class="app clearfix"><%= render 'cert', :cert => cert %></li>
-  <% end %>
-</ul>
-
-<div class="add-app">
+<h2>Certs</h2>
+<div>
   <%= form_tag certs_path do %>
-    <input name="name" placeholder="Cert name" />
-    <textarea name="key" placeholder="Private Key"></textarea>
-    <textarea name="cert" placeholder="Certificate (including chain)"></textarea>
-    <button>Add Cert</button>
+      <input name="name" placeholder="Cert name" />
+      <textarea name="key" placeholder="Private Key"></textarea>
+      <textarea name="cert" placeholder="Certificate (including chain)"></textarea>
+      <button>Add Cert</button>
   <% end %>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Domain</th>
+      <th>Cert</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @certs.each do |cert| %>
+        <%= render 'cert', :cert => cert %>
+      <% end %>
+    </tbody>
+  </table>
 </div>

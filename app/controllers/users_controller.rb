@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(has_access: params[:has_access])
 
-    render nothing: true
+    head :ok
   end
 
   def destroy

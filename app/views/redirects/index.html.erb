@@ -1,20 +1,33 @@
-<ul id="apps">
-  <% @redirects.each do |redirect| %>
-    <li id="<%= redirect.domain %>" class="app clearfix"><%= render 'redirect', :redirect => redirect %></li>
-  <% end %>
-</ul>
-
-<div class="add-app">
+<h2>Domain Redirects</h2>
+<div>
   <%= form_tag redirects_path do %>
-    <input name="domain" placeholder="from domain" />
-    <input name="to" placeholder="target url" />
-    <select class="cert" name="cert" data-placeholder="Choose a cert">
-      <% Cert.all.each do |cert| %>
-        <option><%= cert.name %></option>
-      <% end %>
-    </select>
-    <button>Add Redirect</button>
+      <input name="domain" placeholder="from domain" />
+      <input name="to" placeholder="target url" />
+      <select class="cert" name="cert" data-placeholder="Choose a cert">
+        <% Cert.all.each do |cert| %>
+            <option><%= cert.name %></option>
+        <% end %>
+      </select>
+      <button>Add Redirect</button>
   <% end %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Domain</th>
+        <th>Target</th>
+        <th>Cert</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @redirects.each do |redirect| %>
+        <%= render 'redirect', :redirect => redirect %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <% content_for :onready do %>

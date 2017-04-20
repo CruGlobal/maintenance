@@ -12,7 +12,7 @@ class AppsController < ApplicationController
     @app.dependencies = params['dependencies'] if params['dependencies']
     @app.whitelist = params['whitelist'].split(',').map(&:strip).compact if params['whitelist']
 
-    render nothing: true
+    head :ok
   end
 
   def create

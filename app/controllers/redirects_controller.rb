@@ -7,7 +7,7 @@ class RedirectsController < ApplicationController
     @redirect = Redirect.new(Base64.decode64(params[:id]), nil, params['cert'])
     @redirect.save
 
-    render nothing: true
+    head :ok
   end
 
   def create

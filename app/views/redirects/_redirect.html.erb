@@ -1,32 +1,22 @@
-<header class="app-header">
-  <h3><span class="val"><%= redirect.domain %></span> => <span class="val"><%= redirect.to %></span></h3>
-
-  <nav>
+<tr>
+  <td><%= redirect.domain %></td>
+  <td><%= redirect.to %></td>
+  <td>
+    <%= form_tag redirect_path(Base64.encode64(redirect.domain)), :class => "cert_form", :method => :put, :remote => true do %>
+        <label>Cert</label>
+        <select id="<%= redirect.domain %>_cert" class="cert" name="cert" data-placeholder="Choose a cert">
+          <% Cert.all.each do |cert| %>
+              <option<%= " selected='selected'" if redirect.cert == cert.name %>><%= cert.name %></option>
+          <% end %>
+        </select>
+    <% end %>
+  </td>
+  <td>
     <%= form_tag redirect_path(Base64.encode64(redirect.domain)), method: :delete,
                  data: { confirm: "Are you sure you want to remove #{redirect.domain}?" } do %>
-      <button>remove</button>
+        <button>remove</button>
     <% end %>
-  </nav>
-</header>
-<div class="col">
-  <%= form_tag redirect_path(Base64.encode64(redirect.domain)), :class => "cert_form", :method => :put, :remote => true do %>
-    <label>Cert</label>
-    <select id="<%= redirect.domain %>_cert" class="cert" name="cert" data-placeholder="Choose a cert">
-      <% Cert.all.each do |cert| %>
-        <option<%= " selected='selected'" if redirect.cert == cert.name %>><%= cert.name %></option>
-      <% end %>
-    </select>
-  <% end %>
-</div>
+  </td>
+</tr>
 
-<div class="col">
-  <% if redirect.create_audit %>
-    <p>Created by <%= redirect.created_by.try(:name) %> <br /> <%= redirect.created_at %></p>
-  <% end %>
-</div>
 
-<div class="col">
-  <% if redirect.update_audit %>
-    <p>Updated by <%= redirect.updated_by.try(:name) %> <br /> <%= redirect.updated_at %></p>
-  <% end %>
-</div>

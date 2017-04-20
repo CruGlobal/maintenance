@@ -1,33 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Maintenance Flipper</title>
-    <link href='//fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Maintenance Utilities</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
+
+    <%= javascript_include_tag "application" %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <div id="container">
-      <h1><%= image_tag 'maintenance.gif', :alt => 'Maintenance' %></h1>
-      <% if current_user.has_access? %>
-      <div id="nav">
-        <%= link_to_unless(params[:controller] == 'apps', 'Maintenance', '/') %> |
-        <%= link_to_unless(params[:controller] == 'redirects', 'Redirect Rules', redirects_path) %> |
-        <%= link_to_unless(params[:controller] == 'certs', 'Certs', certs_path) %> |
-        <%= link_to_unless(params[:controller] == 'users', 'Users', users_path) %> |
+    <% if current_user.has_access? %>
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+
+      <a class="navbar-brand" href="/">Cru</a>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item <%= 'active' if params[:controller] == 'apps' %>">
+            <a class="nav-link" href="/">Maintenance</a>
+          </li>
+          <li class="nav-item <%= 'active' if params[:controller] == 'redirects' %>">
+            <a class="nav-link" href="/redirects">Domain Redirects</a>
+          </li>
+          <li class="nav-item <%= 'active' if params[:controller] == 'vanities' %>">
+            <a class="nav-link" href="/vanities">Vanity Redirects</a>
+          </li>
+          <li class="nav-item <%= 'active' if params[:controller] == 'certs' %>">
+            <a class="nav-link" href="/certs">Certs</a>
+          </li>
+          <li class="nav-item <%= 'active' if params[:controller] == 'users' %>">
+            <a class="nav-link" href="/users">Users</a>
+          </li>
+        </ul>
       </div>
-      <% end %>
-      <%= yield %>
+    </nav>
+    <% end %>
+
+    <div class="container-fluid">
+      <!--<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">-->
+        <%= yield %>
+      <!--</main>-->
     </div>
+
+
+
+    <script type="text/javascript">
+      $(function() {
+        <%= yield :onready %>
+      });
+    </script>
   </body>
-
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-  <%= javascript_include_tag "application" %>
-
-  <script type="text/javascript">
-    $(function() {
-      <%= yield :onready %>
-    });
-  </script>
 </html>

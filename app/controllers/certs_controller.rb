@@ -7,7 +7,7 @@ class CertsController < ApplicationController
     @cert = Cert.new(Base64.decode64(params[:id]), params['cert'], params['key'])
     @cert.save
 
-    render nothing: true
+    head :ok
   end
 
   def create
