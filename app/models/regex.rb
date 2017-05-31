@@ -43,11 +43,11 @@ class Regex
   end
 
   def self.all
-    @all ||= hash.sort.collect { |k, v| Regex.new(k, v) }
+    hash.sort.collect { |k, v| Regex.new(k, v) }
   end
 
   def self.hash
-    @hash ||= Redis.current.hgetall(regex_key)
+    Redis.current.hgetall(regex_key)
   end
 
   def created_at
