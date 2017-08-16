@@ -1,4 +1,4 @@
-class CreateAuditEntries < ActiveRecord::Migration
+class CreateAuditEntries < ActiveRecord::Migration[4.2]
   def change
     create_table :audit_entries do |t|
       t.string :change_type
