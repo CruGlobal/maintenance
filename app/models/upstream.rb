@@ -1,12 +1,15 @@
 class Upstream
-  attr_reader :path, :target, :redis
+  attr_reader :pattern, :target, :redis
 
-  def initialize(path, target = nil)
+  TARGETS = {'WordPress': 'WP_ADDR',
+             'Cru.org (Default)': 'DEFAULT_PROXY_TARGET'}
+
+  def initialize(pattern, target = nil)
     @redis = redis || Redis.current
     fail Index::NoredisInstance unless @redis
 
-    @path = path
-    @existing_target = redis.get(upstream_key)
+    @pattern = pattern
+    @existing_target = Upstream.hash[pattern]
     if @existing_target
       # Update if values were passed in. otherwise return existing
       @target = target || @existing_target
@@ -31,11 +34,11 @@ class Upstream
                          to_value: target,
                          user_id: Thread.current[:user_id])
     end
-    redis.set(upstream_key, target)
+    redis.hset(upstream_key, pattern, target)
   end
 
   def destroy
-    redis.del(upstream_key)
+    redis.hdel(upstream_key, pattern)
     AuditEntry.create!(change_type: 'remove_upstream',
                        key: upstream_key,
                        from_value: target,
@@ -43,11 +46,11 @@ class Upstream
   end
 
   def self.all
-    keys = Redis.current.keys('upstreams:*').collect do |k|
-      k.sub('upstreams:', '')
-    end
+    hash.sort.collect { |k, v| Upstream.new(k, v) }
+  end
 
-    keys.sort.collect { |k| Upstream.new(k) }
+  def self.hash
+    Redis.current.hgetall(upstream_key)
   end
 
   def created_at
@@ -76,8 +79,12 @@ class Upstream
                           .order('created_at desc').first
   end
 
+  def self.upstream_key
+    'upstreams'
+  end
+
   def upstream_key
-    "upstreams:#{path}"
+    Upstream.upstream_key
   end
 
   def to_partial_path
