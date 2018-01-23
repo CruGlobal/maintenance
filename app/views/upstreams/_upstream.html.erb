@@ -1,17 +1,9 @@
 <tr>
-  <td><%= upstream.path %></td>
+  <td><%= upstream.pattern %></td>
+  <td><%= Upstream::TARGETS.key(upstream.target) %></td>
   <td>
-    <%= form_tag upstream_path(Base64.encode64(upstream.path)), :class => "target_form", :method => :put, :remote => true do %>
-        <select id="<%= upstream.path %>_target" class="target" name="target" data-placeholder="Choose a target">
-          <% {'Wordpress' => 'WP_ADDR'}.each do |name, constant| %>
-              <option<%= " selected='selected'" if upstream.target == constant %> value="<%= constant %>"><%= name %></option>
-          <% end %>
-        </select>
-    <% end %>
-  </td>
-  <td>
-    <%= form_tag upstream_path(Base64.encode64(upstream.path)), method: :delete,
-                 data: { confirm: "Are you sure you want to remove #{upstream.path}?" } do %>
+    <%= form_tag upstream_path(Base64.encode64(upstream.pattern)), method: :delete,
+                 data: { confirm: "Are you sure you want to remove #{upstream.pattern}?" } do %>
         <button>remove</button>
     <% end %>
   </td>
