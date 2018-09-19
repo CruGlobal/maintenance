@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegexesController < ApplicationController
   def index
     @regexes = Regex.all

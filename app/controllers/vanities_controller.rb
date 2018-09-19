@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VanitiesController < ApplicationController
   def index
     @vanities = Vanity.all

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Cert
   attr_reader :name, :cert, :key, :redis
 
   def initialize(name, cert = nil, key = nil)
     @redis = redis || Redis.current
-    fail Index::NoredisInstance unless @redis
+    raise Index::NoredisInstance unless @redis
 
     @name = name
     @existing = redis.hmget(cert_key, 'cert', 'key')
