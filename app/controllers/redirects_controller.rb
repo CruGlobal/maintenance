@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RedirectsController < ApplicationController
   def index
     @redirects = Redirect.all

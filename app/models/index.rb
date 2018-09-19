@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Index
   class NoredisInstance < StandardError; end
 
@@ -5,7 +7,7 @@ class Index
 
   def initialize(redis = nil)
     @redis = redis || Redis.current
-    fail NoredisInstance unless @redis
+    raise NoredisInstance unless @redis
   end
 
   def add_app(app)

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class App
   attr_reader :name, :redis
 
   def initialize(name)
     @name = name
     @redis = redis || Redis.current
-    fail Index::NoredisInstance unless @redis
+    raise Index::NoredisInstance unless @redis
   end
 
   def dependencies

@@ -1,4 +1,6 @@
-class User < ActiveRecord::Base
+# frozen_string_literal: true
+
+class User < ApplicationRecord
   def self.find_or_create_from_auth_hash(auth_hash)
     existing = find_by(sso_guid: auth_hash.extra.ssoGuid)
     return existing.apply_auth_hash(auth_hash) if existing

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Redirect
   attr_reader :domain, :to, :cert, :redis
 
   def initialize(domain, to = nil, cert = nil)
     @redis = redis || Redis.current
-    fail Index::NoredisInstance unless @redis
+    raise Index::NoredisInstance unless @redis
 
     @domain = domain
     @existing_to = redis.get(redirect_key)
@@ -77,8 +79,8 @@ class Redirect
 
   def update_audit
     @update_audit ||= AuditEntry.includes(:user)
-      .where(change_type: 'update_redirect', key: redirect_key)
-      .order('created_at desc').first
+                                .where(change_type: 'update_redirect', key: redirect_key)
+                                .order('created_at desc').first
   end
 
   private

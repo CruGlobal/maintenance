@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -13,14 +15,14 @@ gem 'uglifier', '>= 1.3.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '~> 4.3.1'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'redis'
-gem 'syslog-logger'
-gem 'puma'
-gem 'pg'
 gem 'omniauth-cas'
+gem 'parser'
+gem 'pg'
+gem 'puma'
+gem 'redis'
 gem 'rubocop'
-gem 'parser', '2.3.0.7'
+gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'syslog-logger'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -42,6 +44,6 @@ group :development do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   gem 'dotenv-rails'
+  gem 'spring'
 end

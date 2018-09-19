@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CertsController < ApplicationController
   def index
     @certs = Cert.all
