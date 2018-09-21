@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 class Vanity
   attr_reader :path, :target, :redis
 
   def initialize(path, target = nil)
     @redis = redis || Redis.current
-    fail Index::NoredisInstance unless @redis
+    raise Index::NoredisInstance unless @redis
 
     @path = path
     @existing_target = redis.get(vanity_key)
-    if @existing_target
-      # Update if values were passed in. otherwise return existing
-      @target = target || @existing_target
-    else
-      @target = target
-    end
+    @target = if @existing_target
+                # Update if values were passed in. otherwise return existing
+                target || @existing_target
+              else
+                target
+              end
 
     self
   end
@@ -72,8 +74,8 @@ class Vanity
 
   def update_audit
     @update_audit ||= AuditEntry.includes(:user)
-                          .where(change_type: 'update_vanity', key: vanity_key)
-                          .order('created_at desc').first
+                                .where(change_type: 'update_vanity', key: vanity_key)
+                                .order('created_at desc').first
   end
 
   def vanity_key

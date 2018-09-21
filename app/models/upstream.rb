@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 class Upstream
   attr_reader :pattern, :target, :redis
 
-  TARGETS = {'WordPress': 'WP_ADDR',
-             'Cru.org (Default)': 'DEFAULT_PROXY_TARGET'}
+  TARGETS = { 'WordPress': 'WP_ADDR',
+              'Cru.org (Default)': 'DEFAULT_PROXY_TARGET' }.freeze
 
   def initialize(pattern, target = nil)
     @redis = redis || Redis.current
-    fail Index::NoredisInstance unless @redis
+    raise Index::NoredisInstance unless @redis
 
     @pattern = pattern
     @existing_target = Upstream.hash[pattern]
-    if @existing_target
-      # Update if values were passed in. otherwise return existing
-      @target = target || @existing_target
-    else
-      @target = target
-    end
+    @target = if @existing_target
+                # Update if values were passed in. otherwise return existing
+                target || @existing_target
+              else
+                target
+              end
 
     self
   end
@@ -75,8 +77,8 @@ class Upstream
 
   def update_audit
     @update_audit ||= AuditEntry.includes(:user)
-                          .where(change_type: 'update_upstream', key: upstream_key)
-                          .order('created_at desc').first
+                                .where(change_type: 'update_upstream', key: upstream_key)
+                                .order('created_at desc').first
   end
 
   def self.upstream_key
