@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.1'
+gem 'rails', '~> 5.1.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -18,8 +18,8 @@ gem 'jquery-rails', '~> 4.3.1'
 gem 'omniauth-cas'
 gem 'parser'
 gem 'pg'
-gem 'puma'
-gem 'redis'
+gem 'puma', '~> 3.7'
+gem 'redis', '~> 4.0'
 gem 'rubocop'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'syslog-logger'
