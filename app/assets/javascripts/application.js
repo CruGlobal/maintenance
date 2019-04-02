@@ -5,6 +5,7 @@
 // the compiled file.
 //
 //= require jquery3
-//= require jquery_ujs
+//= require rails-ujs
+//= require activestorage
 //= require chosen.jquery
 //= require_tree .
