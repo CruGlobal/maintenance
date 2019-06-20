@@ -74,3 +74,8 @@ gem 'redis', '~> 4.0'
 gem 'rubocop'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'syslog-logger'
+gem 'awesome_print'
+gem 'lograge'
+gem 'ougai', '~> 1.7'
+gem 'ddtrace'
+gem 'dogstatsd-ruby'
