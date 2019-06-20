@@ -48,6 +48,7 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
+    awesome_print (1.8.0)
     bindex (0.6.0)
     bootsnap (1.4.2)
       msgpack (~> 1.0)
@@ -69,6 +70,9 @@ GEM
     coderay (1.1.1)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    ddtrace (0.24.0)
+      msgpack
+    dogstatsd-ruby (4.2.0)
     dotenv (2.7.2)
     dotenv-rails (2.7.2)
       dotenv (= 2.7.2)
@@ -92,6 +96,11 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
+    lograge (0.11.2)
+      actionpack (>= 4)
+      activesupport (>= 4)
+      railties (>= 4)
+      request_store (~> 1.0)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -108,6 +117,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.2)
       mini_portile2 (~> 2.4.0)
+    oj (3.7.12)
     omniauth (1.6.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
@@ -115,6 +125,8 @@ GEM
       addressable (~> 2.3)
       nokogiri (~> 1.5)
       omniauth (~> 1.2)
+    ougai (1.7.1)
+      oj (~> 3.4)
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
@@ -163,6 +175,8 @@ GEM
     rdoc (4.3.0)
     redis (4.1.0)
     regexp_parser (1.4.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     rubocop (0.59.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -224,14 +238,19 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
+  ddtrace
+  dogstatsd-ruby
   dotenv-rails
   jquery-rails (~> 4.3.1)
   listen (>= 3.0.5, < 3.2)
+  lograge
   omniauth-cas
+  ougai (~> 1.7)
   parser
   pg
   pry-rails
