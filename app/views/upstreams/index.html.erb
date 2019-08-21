@@ -1,7 +1,7 @@
 <h2>Upstreams</h2>
 <div>
     <%= form_tag upstreams_path, id: 'add_upstream_form' do %>
-    <input class="path" name="path" placeholder="URL Pattern" />
+    <input class="path" name="path" placeholder="URL Pattern" required minlength="6" />
       <select id="new_target" class="target" name="target" data-placeholder="Choose a target">
         <% Upstream::TARGETS.each do |name, constant| %>
             <option value="<%= constant %>"><%= name %></option>
