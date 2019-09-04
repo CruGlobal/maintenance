@@ -27,8 +27,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate
-    redirect_to '/auth/cas' and return unless current_user
+    redirect_to("/auth/cas") && return unless current_user
 
-    redirect_to '/users/no_access' unless current_user.has_access?
+    redirect_to "/users/no_access" unless current_user.has_access?
   end
 end

@@ -6,7 +6,7 @@ class UpstreamsController < ApplicationController
   end
 
   def update
-    upstream = Redirect.new(Base64.decode64(params[:id]), params['target'])
+    upstream = Redirect.new(Base64.decode64(params[:id]), params["target"])
     upstream.save
 
     head :ok

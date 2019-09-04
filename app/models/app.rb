@@ -23,7 +23,7 @@ class App
 
   def add_dependency(dep)
     redis.sadd(dependencies_key, dep)
-    AuditEntry.create!(change_type: 'add_dependency',
+    AuditEntry.create!(change_type: "add_dependency",
                        key: dependencies_key,
                        to_value: dep,
                        user_id: Thread.current[:user_id])
@@ -31,24 +31,24 @@ class App
 
   def remove_dependency(dep)
     redis.srem(dependencies_key, dep)
-    AuditEntry.create!(change_type: 'remove_dependency',
+    AuditEntry.create!(change_type: "remove_dependency",
                        key: dependencies_key,
                        from_value: dep,
                        user_id: Thread.current[:user_id])
   end
 
   def maintenance=(maint)
-    if maint == '1'
+    if maint == "1"
       redis.set(maintenance_key, true)
       update_dependencies
-      AuditEntry.create!(change_type: 'set_maintenance',
+      AuditEntry.create!(change_type: "set_maintenance",
                          key: maintenance_key,
                          from_value: false,
                          to_value: true,
                          user_id: Thread.current[:user_id])
     else
       redis.del(maintenance_key)
-      AuditEntry.create!(change_type: 'set_maintenance',
+      AuditEntry.create!(change_type: "set_maintenance",
                          key: maintenance_key,
                          from_value: true,
                          to_value: false,
@@ -76,7 +76,7 @@ class App
 
   def add_domain(domain)
     redis.sadd(whitelist_key, domain)
-    AuditEntry.create!(change_type: 'add_domain',
+    AuditEntry.create!(change_type: "add_domain",
                        key: whitelist_key,
                        to_value: domain,
                        user_id: Thread.current[:user_id])
@@ -84,7 +84,7 @@ class App
 
   def remove_domain(domain)
     redis.srem(whitelist_key, domain)
-    AuditEntry.create!(change_type: 'remove_domain',
+    AuditEntry.create!(change_type: "remove_domain",
                        key: whitelist_key,
                        from_value: domain,
                        user_id: Thread.current[:user_id])
@@ -106,7 +106,7 @@ class App
 
   def update_dependencies
     dependencies.each do |dep|
-      App.new(dep).maintenance = '1'
+      App.new(dep).maintenance = "1"
     end
   end
 end

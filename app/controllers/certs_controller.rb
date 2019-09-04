@@ -6,14 +6,14 @@ class CertsController < ApplicationController
   end
 
   def update
-    @cert = Cert.new(Base64.decode64(params[:id]), params['cert'], params['key'])
+    @cert = Cert.new(Base64.decode64(params[:id]), params["cert"], params["key"])
     @cert.save
 
     head :ok
   end
 
   def create
-    cert = Cert.new(params[:name], params['cert'], params['key'])
+    cert = Cert.new(params[:name], params["cert"], params["key"])
     cert.save
 
     redirect_to certs_path
