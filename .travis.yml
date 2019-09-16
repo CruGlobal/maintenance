@@ -1,6 +1,4 @@
 language: ruby
-rvm:
-  - 2.5.5
 cache:
   bundler: true
 services:
