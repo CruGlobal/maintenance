@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'monitors/lb' => 'monitors#lb'
-  get '/auth/:provider/callback', to: 'sessions#create'
-  root to: 'apps#index'
+  get "monitors/lb" => "monitors#lb"
+  get "/auth/:provider/callback", to: "sessions#create"
+  root to: "apps#index"
 end

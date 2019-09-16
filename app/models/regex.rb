@@ -10,24 +10,24 @@ class Regex
     @pattern = pattern
     @existing_target = Regex.hash[pattern]
     @target = if @existing_target
-                # Update if values were passed in. otherwise return existing
-                target || @existing_target
-              else
-                target
-              end
+      # Update if values were passed in. otherwise return existing
+      target || @existing_target
+    else
+      target
+    end
 
     self
   end
 
   def save
     unless @existing_target
-      AuditEntry.create!(change_type: 'add_regex',
+      AuditEntry.create!(change_type: "add_regex",
                          key: regex_key,
                          to_value: target,
                          user_id: Thread.current[:user_id])
     end
     if @existing_target && target != @existing_target
-      AuditEntry.create!(change_type: 'update_regex',
+      AuditEntry.create!(change_type: "update_regex",
                          key: regex_key,
                          from_value: @existing_target,
                          to_value: target,
@@ -38,7 +38,7 @@ class Regex
 
   def destroy
     redis.hdel(regex_key, pattern)
-    AuditEntry.create!(change_type: 'remove_regex',
+    AuditEntry.create!(change_type: "remove_regex",
                        key: regex_key,
                        from_value: target,
                        user_id: Thread.current[:user_id])
@@ -69,17 +69,17 @@ class Regex
   end
 
   def create_audit
-    @create_audit ||= AuditEntry.includes(:user).find_by(change_type: 'add_regex', key: regex_key)
+    @create_audit ||= AuditEntry.includes(:user).find_by(change_type: "add_regex", key: regex_key)
   end
 
   def update_audit
     @update_audit ||= AuditEntry.includes(:user)
-                                .where(change_type: 'update_regex', key: regex_key)
-                                .order('created_at desc').first
+      .where(change_type: "update_regex", key: regex_key)
+      .order("created_at desc").first
   end
 
   def self.regex_key
-    'redirects:regex'
+    "redirects:regex"
   end
 
   def regex_key
@@ -87,6 +87,6 @@ class Regex
   end
 
   def to_partial_path
-    'regex'
+    "regex"
   end
 end
