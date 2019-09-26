@@ -1,0 +1,28 @@
+language: ruby
+cache:
+  bundler: true
+services:
+  - redis-server
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+      - postgresql-10
+      - postgresql-client-10
+before_install:
+  - gem install bundler -v '1.17.3'
+  - sudo cp /etc/postgresql/{9.6,10}/main/pg_hba.conf
+  - sudo /etc/init.d/postgresql restart
+  - bundle config gems.contribsys.com $COVERALLS_REPO_TOKEN
+bundler_args: --without production doc
+before_script:
+  - psql -c 'create database redirector_test;' -U postgres
+  - bundle exec rake db:schema:load RAILS_ENV=test
+
+env:
+  - REDIS_PORT_6379_TCP_ADDR=localhost REDIS_PORT_6379_TCP_PORT=6379 REDIS_PORT_6379_TCP_ADDR_SESSION=localhost REDIS_PORT_6379_TCP_PORT_SESSION=6379 DB_ENV_POSTGRESQL_DB=redirector_test DB_ENV_POSTGRESQL_USER=postgres TRAVIS=true GIVE_SESSION_KEY=99999 DB_PORT_5432_TCP_ADDR=5433 DB_PORT_5432_TCP_ADDR=localhost DB_ENV_POSTGRESQL_PASS=''
+script:
+  - bundle exec rails test
+  - bundle exec standardrb
+  - bundle exec bundle audit check --ignore CVE-2015-9284
+  - bundle exec brakeman --ensure-latest -A -q --no-pager

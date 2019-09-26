@@ -10,9 +10,9 @@ class AppsController < ApplicationController
   def update
     @app = App.new(params[:id])
 
-    @app.maintenance = params['maintenance'] if params['maintenance']
-    @app.dependencies = params['dependencies'] if params['dependencies']
-    @app.whitelist = params['whitelist'].split(',').map(&:strip).compact if params['whitelist']
+    @app.maintenance = params["maintenance"] if params["maintenance"]
+    @app.dependencies = params["dependencies"] if params["dependencies"]
+    @app.whitelist = params["whitelist"].split(",").map(&:strip).compact if params["whitelist"]
 
     head :ok
   end

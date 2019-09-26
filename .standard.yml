@@ -1,0 +1,11 @@
+ignore:
+    - app/models/regex.rb:
+        - Lint/Void
+    - app/models/vanity.rb:
+        - Lint/Void
+    - app/models/upstream.rb:
+        - Lint/Void
+    - app/models/cert.rb:
+        - Lint/Void
+    - app/models/redirect.rb:
+        - Lint/Void

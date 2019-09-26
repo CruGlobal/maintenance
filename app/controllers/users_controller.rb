@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate, only: [:no_access]
   def index
-    @users = User.order('has_access desc, last_name, first_name')
+    @users = User.order("has_access desc, last_name, first_name")
   end
 
   def update
@@ -21,6 +21,6 @@ class UsersController < ApplicationController
   end
 
   def no_access
-    redirect_to '/' and return if current_user.has_access?
+    redirect_to("/") && return if current_user.has_access?
   end
 end
