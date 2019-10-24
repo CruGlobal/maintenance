@@ -70,6 +70,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 # Use jquery as the JavaScript library
 gem "jquery-rails", "~> 4.3.1"
 gem "omniauth-cas"
+gem "omniauth-rails_csrf_protection"
 gem "parser"
 gem "pg"
 gem "redis", "~> 4.0"
