@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: :create
+  skip_before_action :authenticate, only: [:new, :create]
 
   def create
     @user = User.find_or_create_from_auth_hash(auth_hash)
