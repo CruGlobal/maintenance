@@ -37,7 +37,7 @@ class Regex
   end
 
   def destroy
-    redis.hdel(regex_key, pattern)
+    redis.del(regex_key, pattern)
     AuditEntry.create!(change_type: "remove_regex",
                        key: regex_key,
                        from_value: target,
