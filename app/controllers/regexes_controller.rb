@@ -6,8 +6,10 @@ class RegexesController < ApplicationController
   end
 
   def create
-    regex = Regex.new(params[:pattern], params[:target])
-    regex.save
+    if params[:pattern] != ''
+      regex = Regex.new(params[:pattern], params[:target])
+      regex.save
+    end
 
     redirect_to regexes_path
   end
