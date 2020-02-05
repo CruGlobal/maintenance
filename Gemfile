@@ -3,12 +3,12 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.6.4"
+ruby "2.6.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.2.3"
 # Use Puma as the app server
-gem "puma", "~> 3.11"
+gem "puma", "~> 3.12"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 5.0"
 # Use Uglifier as compressor for JavaScript assets
@@ -70,6 +70,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 # Use jquery as the JavaScript library
 gem "jquery-rails", "~> 4.3.1"
 gem "omniauth-cas"
+gem "omniauth-rails_csrf_protection"
 gem "parser"
 gem "pg"
 gem "redis", "~> 4.0"

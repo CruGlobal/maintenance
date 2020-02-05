@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(has_access: params[:has_access])
 
-    head :ok
+    redirect_to users_path
   end
 
   def destroy

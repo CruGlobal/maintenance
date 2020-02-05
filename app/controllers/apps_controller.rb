@@ -14,11 +14,11 @@ class AppsController < ApplicationController
     @app.dependencies = params["dependencies"] if params["dependencies"]
     @app.whitelist = params["whitelist"].split(",").map(&:strip).compact if params["whitelist"]
 
-    head :ok
+    redirect_to apps_path
   end
 
   def create
-    @index.add_app(params[:name]) unless @index.apps.include?(params[:name])
+    @index.add_app(params[:name]) unless @index.apps.include?(params[:name]) || params[:name] == ''
 
     redirect_to apps_path
   end

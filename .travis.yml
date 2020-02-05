@@ -24,5 +24,5 @@ env:
 script:
   - bundle exec rails test
   - bundle exec standardrb
-  - bundle exec bundle audit check --ignore CVE-2015-9284
+  - bundle exec bundle audit check --update --ignore CVE-2015-9284
   - bundle exec brakeman --ensure-latest -A -q --no-pager

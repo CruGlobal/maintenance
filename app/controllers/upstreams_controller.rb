@@ -9,7 +9,7 @@ class UpstreamsController < ApplicationController
     upstream = Redirect.new(Base64.decode64(params[:id]), params["target"])
     upstream.save
 
-    head :ok
+    redirect_to upstreams_path
   end
 
   def create

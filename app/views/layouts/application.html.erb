@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <% if current_user.has_access? %>
+    <% if current_user&.has_access? %>
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#maintenanceNavBar" aria-controls="maintenanceNavBar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

@@ -9,12 +9,14 @@ class RedirectsController < ApplicationController
     @redirect = Redirect.new(Base64.decode64(params[:id]), nil, params["cert"])
     @redirect.save
 
-    head :ok
+    redirect_to redirects_path
   end
 
   def create
-    redirect = Redirect.new(params[:domain], params["to"], params["cert"])
-    redirect.save
+    if params[:domain] != ''
+      redirect = Redirect.new(params[:domain], params["to"], params["cert"])
+      redirect.save
+    end
 
     redirect_to redirects_path
   end
