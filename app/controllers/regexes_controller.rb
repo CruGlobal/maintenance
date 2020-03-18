@@ -6,7 +6,7 @@ class RegexesController < ApplicationController
   end
 
   def create
-    if params[:pattern] != ''
+    if params[:pattern] != ""
       regex = Regex.new(params[:pattern], params[:target])
       regex.save
     end

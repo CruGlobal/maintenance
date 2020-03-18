@@ -13,7 +13,7 @@ class RedirectsController < ApplicationController
   end
 
   def create
-    if params[:domain] != ''
+    if params[:domain] != ""
       redirect = Redirect.new(params[:domain], params["to"], params["cert"])
       redirect.save
     end

@@ -18,7 +18,7 @@ class AppsController < ApplicationController
   end
 
   def create
-    @index.add_app(params[:name]) unless @index.apps.include?(params[:name]) || params[:name] == ''
+    @index.add_app(params[:name]) unless @index.apps.include?(params[:name]) || params[:name] == ""
 
     redirect_to apps_path
   end
