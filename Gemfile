@@ -75,7 +75,7 @@ gem "parser"
 gem "pg"
 gem "redis", "~> 4.0"
 gem "rubocop"
-gem "sdoc", "~> 0.4.0", group: :doc
+gem "sdoc", group: :doc
 gem "syslog-logger"
 gem "awesome_print"
 gem "lograge"
