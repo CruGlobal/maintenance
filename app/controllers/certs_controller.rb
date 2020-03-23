@@ -13,7 +13,7 @@ class CertsController < ApplicationController
   end
 
   def create
-    if params[:name] != ''
+    if params[:name] != ""
       cert = Cert.new(params[:name], params["cert"], params["key"])
       cert.save
     end
