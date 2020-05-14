@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  force_ssl(if: :ssl_configured?, except: :lb)
-
   before_action :authenticate
 
   def current_user=(user)
