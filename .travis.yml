@@ -1,6 +1,9 @@
 language: ruby
 cache:
   bundler: true
+  directories:
+    - node_modules
+  yarn: true
 services:
   - redis-server
 addons:
@@ -10,10 +13,10 @@ addons:
       - postgresql-10
       - postgresql-client-10
 before_install:
-  - gem install bundler -v '1.17.3'
   - sudo cp /etc/postgresql/{9.6,10}/main/pg_hba.conf
   - sudo /etc/init.d/postgresql restart
   - bundle config gems.contribsys.com $COVERALLS_REPO_TOKEN
+  - yarn --ignore-engines
 bundler_args: --without production doc
 before_script:
   - psql -c 'create database redirector_test;' -U postgres
