@@ -19,7 +19,7 @@ RUN bundle binstub puma rake
 
 COPY . ./
 
-ARG REDIS_PORT_6379_TCP_ADDR=localhost
+ARG MAINTENANCE_REDIS_HOST=localhost
 RUN bundle exec rake assets:clobber assets:precompile RAILS_ENV=production
 
 ## Run this last to make sure permissions are all correct
