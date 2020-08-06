@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   end
 
   get "monitors/lb" => "monitors#lb"
-  get "/sessions/new", to: "sessions#new"
-  get "/auth/:provider/callback", to: "sessions#create"
+
+  resource :sessions, only: %i[new destroy]
+  get "auth/oktaoauth/callback", to: "sessions#create"
+  match "/logout" => "sessions#destroy", :as => :logout, :via => [:get, :post, :delete]
+
   root to: "apps#index"
 end
