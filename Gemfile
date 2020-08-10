@@ -60,7 +60,7 @@ end
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 gem "omniauth"
-gem "omniauth-oktaoauth", git: "https://github.com/cruglobal/omniauth-oktaoauth.git"
+gem "omniauth-oktaoauth", github: "CruGlobal/omniauth-oktaoauth"
 gem "omniauth-rails_csrf_protection"
 gem "parser"
 gem "pg"
