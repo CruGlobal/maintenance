@@ -14,8 +14,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
-    redirect_to "#{ENV.fetch("OKTA_ISSUER")}/v1/logout?id_token_hint=#{session[:id_token]}&post_logout_redirect_uri=#{request.base_url}"
+    id_token = session[:id_token]
+    session.clear
+    if id_token.present?
+      redirect_to "#{ENV.fetch("OKTA_ISSUER")}/v1/logout?id_token_hint=#{id_token}&post_logout_redirect_uri=#{request.base_url}"
+    else
+      redirect_to root_path
+    end
   end
 
   protected
