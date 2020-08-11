@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/cruglobal/omniauth-oktaoauth.git
+  remote: https://github.com/CruGlobal/omniauth-oktaoauth.git
   revision: e78ffb420cb9ab89fd8951d9fe8a20f175c41618
   specs:
     omniauth-oktaoauth (0.1.6)
@@ -145,8 +145,8 @@ GEM
     omniauth (1.9.0)
       hashie (>= 3.4.6, < 3.7.0)
       rack (>= 1.6.2, < 3)
-    omniauth-oauth2 (1.6.0)
-      oauth2 (~> 1.1)
+    omniauth-oauth2 (1.7.0)
+      oauth2 (~> 1.4)
       omniauth (~> 1.9)
     omniauth-rails_csrf_protection (0.1.2)
       actionpack (>= 4.2)
