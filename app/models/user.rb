@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   def apply_auth_hash(auth_hash)
     self.sso_guid = auth_hash.extra.raw_info.ssoguid
-    self.username = omniauth.extra.raw_info.preferred_username
+    self.username = auth_hash.extra.raw_info.preferred_username
     self.first_name = auth_hash.info.first_name
     self.last_name = auth_hash.info.last_name
     save!
