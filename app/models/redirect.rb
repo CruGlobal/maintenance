@@ -1,22 +1,19 @@
 # frozen_string_literal: true
 
 class Redirect
-  attr_reader :domain, :to, :cert, :redis
+  attr_reader :domain, :to, :redis
 
-  def initialize(domain, to = nil, cert = nil)
+  def initialize(domain, to = nil)
     @redis = redis || Redis.current
     raise Index::NoredisInstance unless @redis
 
     @domain = domain
     @existing_to = redis.get(redirect_key)
-    @existing_cert = redis.get(cert_key)
     if @existing_to
       # Update if values were passed in. otherwise return existing
       @to = to || @existing_to
-      @cert = cert || @existing_cert
     else
       @to = to
-      @cert = cert
     end
 
     self
@@ -26,26 +23,17 @@ class Redirect
     unless @existing_to
       AuditEntry.create!(change_type: "add_redirect",
                          key: redirect_key,
-                         to_value: to + "using #{cert}",
-                         user_id: Thread.current[:user_id])
-    end
-    if @existing_cert && cert != @existing_cert
-      AuditEntry.create!(change_type: "update_redirect",
-                         key: redirect_key,
-                         from_value: @existing_cert,
-                         to_value: cert,
+                         to_value: to,
                          user_id: Thread.current[:user_id])
     end
     redis.set(redirect_key, to)
-    redis.set(cert_key, cert)
   end
 
   def destroy
     redis.del(redirect_key)
-    redis.del(cert_key)
     AuditEntry.create!(change_type: "remove_redirect",
                        key: redirect_key,
-                       from_value: to + " using #{cert}",
+                       from_value: to,
                        user_id: Thread.current[:user_id])
   end
 
@@ -87,9 +75,5 @@ class Redirect
 
   def redirect_key
     "domain_redirect:#{domain}"
-  end
-
-  def cert_key
-    "domain:#{domain}"
   end
 end
