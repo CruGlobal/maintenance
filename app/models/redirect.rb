@@ -9,11 +9,11 @@ class Redirect
 
     @domain = domain
     @existing_to = redis.get(redirect_key)
-    if @existing_to
+    @to = if @existing_to
       # Update if values were passed in. otherwise return existing
-      @to = to || @existing_to
+      to || @existing_to
     else
-      @to = to
+      to
     end
 
     self
