@@ -33,16 +33,12 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Redirects</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="/redirects">Domains</a>
               <a class="dropdown-item" href="/vanities">Vanities</a>
               <a class="dropdown-item" href="/regexes">Regexes</a>
             </div>
           </li>
           <li class="nav-item <%= 'active' if params[:controller] == 'upstreams' %>">
             <a class="nav-link" href="/upstreams">Upstreams</a>
-          </li>
-          <li class="nav-item <%= 'active' if params[:controller] == 'certs' %>">
-            <a class="nav-link" href="/certs">Certs</a>
           </li>
           <li class="nav-item <%= 'active' if params[:controller] == 'users' %>">
             <a class="nav-link" href="/users">Users</a>
