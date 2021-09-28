@@ -13,6 +13,7 @@ addons:
       - postgresql-10
       - postgresql-client-10
 before_install:
+  - gem install bundler -v 2.2.28
   - sudo cp /etc/postgresql/{9.6,10}/main/pg_hba.conf
   - sudo /etc/init.d/postgresql restart
   - bundle config gems.contribsys.com $COVERALLS_REPO_TOKEN
@@ -29,4 +30,4 @@ script:
   - bundle exec standardrb
   - bundle exec bundle audit check --update --ignore CVE-2015-9284
   - bundle exec brakeman --ensure-latest -A -q --no-pager
-  - yarn audit
+  - yarn run improved-yarn-audit --ignore-dev-deps
