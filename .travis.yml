@@ -13,6 +13,7 @@ addons:
       - postgresql-10
       - postgresql-client-10
 before_install:
+  - gem install bundler -v 2.2.28
   - sudo cp /etc/postgresql/{9.6,10}/main/pg_hba.conf
   - sudo /etc/init.d/postgresql restart
   - bundle config gems.contribsys.com $COVERALLS_REPO_TOKEN
