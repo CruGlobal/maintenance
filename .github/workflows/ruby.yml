@@ -7,53 +7,6 @@ on:
     branches: [staging]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    env:
-      DB_PORT_5432_TCP_ADDR: localhost  # DB_PORT_5432_TCP_ADDR_TEST alone throws an error due to ENV.fetch in database.yml
-      DB_ENV_POSTGRESQL_USER: postgres  # similar problem
-      DB_ENV_POSTGRESQL_PASS: postgres  # similar problem
-      DB_ENV_POSTGRESQL_DB_TEST: postgres
-      MAINTENANCE_REDIS_HOST: localhost
-      RAILS_ENV: test
-
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-        ports:
-          - 5432:5432
-      redis:
-        image: redis
-        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
-        ports:
-          - 6379:6379
-
-    steps:
-      - name: Check out files
-        uses: actions/checkout@v2
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-        env:
-          BUNDLE_GEMS__CONTRIBSYS__COM: ${{ secrets.BUNDLE_GEMS__CONTRIBSYS__COM }}
-
-      - name: Set up DB
-        run: |
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
-
-      - name: Install yarn dependencies
-        run: yarn --ignore-engines
-
-      - name: Rails tests
-        run: bundle exec rails test
-
   lint:
     runs-on: ubuntu-latest
     steps:
