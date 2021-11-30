@@ -12,8 +12,8 @@ jobs:
 
     env:
       DB_PORT_5432_TCP_ADDR_TEST: localhost
-      DB_ENV_POSTGRESQL_USER_TEST: postgres
-      DB_ENV_POSTGRESQL_PASS_TEST: postgres
+      DB_ENV_POSTGRESQL_USER: postgres  # DB_ENV_POSTGRESQL_USER_TEST alone throws an error due to ENV.fetch in database.yml
+      DB_ENV_POSTGRESQL_PASS: postgres
       DB_ENV_POSTGRESQL_DB_TEST: postgres
       MAINTENANCE_REDIS_HOST: localhost
       RAILS_ENV: test
