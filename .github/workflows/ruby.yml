@@ -15,6 +15,7 @@ jobs:
       DB_ENV_POSTGRESQL_USER_TEST: postgres
       DB_ENV_POSTGRESQL_PASS_TEST: postgres
       DB_ENV_POSTGRESQL_DB_TEST: postgres
+      MAINTENANCE_REDIS_HOST: localhost
       RAILS_ENV: test
 
     services:
@@ -25,11 +26,11 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         ports:
           - 5432:5432
-#     redis:
-#       image: redis
-#       options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
-#       ports:
-#         - 6379:6379
+      redis:
+        image: redis
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+        ports:
+          - 6379:6379
 
     steps:
       - name: Check out files
@@ -41,7 +42,6 @@ jobs:
           bundler-cache: true
         env:
           BUNDLE_GEMS__CONTRIBSYS__COM: ${{ secrets.BUNDLE_GEMS__CONTRIBSYS__COM }}
-          # Might need to ignore the `doc` group
 
       - name: Set up DB
         run: |
