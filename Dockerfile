@@ -11,7 +11,7 @@ WORKDIR /home/webapp/app
 
 # Environment required to build the application
 ARG RAILS_ENV=production
-ARG MAINTENANCE_REDIS_HOST=localhost
+ARG STORAGE_REDIS_HOST=localhost
 ARG SECRET_KEY_BASE=abc123
 
 # Upgrade alpine packages (useful for security fixes)
