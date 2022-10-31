@@ -4,3 +4,5 @@ vendor/cache
 vendor/bundle
 vendor/ruby
 log/*
+node_modules
+Dockerfile
