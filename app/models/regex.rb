@@ -22,16 +22,16 @@ class Regex
   def save
     unless @existing_target
       AuditEntry.create!(change_type: "add_regex",
-                         key: regex_key,
-                         to_value: target,
-                         user_id: Thread.current[:user_id])
+        key: regex_key,
+        to_value: target,
+        user_id: Thread.current[:user_id])
     end
     if @existing_target && target != @existing_target
       AuditEntry.create!(change_type: "update_regex",
-                         key: regex_key,
-                         from_value: @existing_target,
-                         to_value: target,
-                         user_id: Thread.current[:user_id])
+        key: regex_key,
+        from_value: @existing_target,
+        to_value: target,
+        user_id: Thread.current[:user_id])
     end
     redis.hset(regex_key, pattern, target)
   end
@@ -39,9 +39,9 @@ class Regex
   def destroy
     redis.hdel(regex_key, pattern)
     AuditEntry.create!(change_type: "remove_regex",
-                       key: regex_key,
-                       from_value: target,
-                       user_id: Thread.current[:user_id])
+      key: regex_key,
+      from_value: target,
+      user_id: Thread.current[:user_id])
   end
 
   def self.all

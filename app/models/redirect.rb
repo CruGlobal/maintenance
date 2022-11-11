@@ -22,9 +22,9 @@ class Redirect
   def save
     unless @existing_to
       AuditEntry.create!(change_type: "add_redirect",
-                         key: redirect_key,
-                         to_value: to,
-                         user_id: Thread.current[:user_id])
+        key: redirect_key,
+        to_value: to,
+        user_id: Thread.current[:user_id])
     end
     redis.set(redirect_key, to)
   end
@@ -32,9 +32,9 @@ class Redirect
   def destroy
     redis.del(redirect_key)
     AuditEntry.create!(change_type: "remove_redirect",
-                       key: redirect_key,
-                       from_value: to,
-                       user_id: Thread.current[:user_id])
+      key: redirect_key,
+      from_value: to,
+      user_id: Thread.current[:user_id])
   end
 
   def self.all

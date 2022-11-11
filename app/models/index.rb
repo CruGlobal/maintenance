@@ -13,17 +13,17 @@ class Index
   def add_app(app)
     redis.sadd(apps_key, app)
     AuditEntry.create!(change_type: "add_app",
-                       key: apps_key,
-                       to_value: app,
-                       user_id: Thread.current[:user_id])
+      key: apps_key,
+      to_value: app,
+      user_id: Thread.current[:user_id])
   end
 
   def remove_app(app)
     redis.srem(apps_key, app)
     AuditEntry.create!(change_type: "remove_app",
-                       key: apps_key,
-                       from_value: app,
-                       user_id: Thread.current[:user_id])
+      key: apps_key,
+      from_value: app,
+      user_id: Thread.current[:user_id])
   end
 
   def apps
