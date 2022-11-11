@@ -22,16 +22,16 @@ class Vanity
   def save
     unless @existing_target
       AuditEntry.create!(change_type: "add_vanity",
-                         key: vanity_key,
-                         to_value: target,
-                         user_id: Thread.current[:user_id])
+        key: vanity_key,
+        to_value: target,
+        user_id: Thread.current[:user_id])
     end
     if @existing_target && target != @existing_target
       AuditEntry.create!(change_type: "update_vanity",
-                         key: vanity_key,
-                         from_value: @existing_target,
-                         to_value: target,
-                         user_id: Thread.current[:user_id])
+        key: vanity_key,
+        from_value: @existing_target,
+        to_value: target,
+        user_id: Thread.current[:user_id])
     end
     redis.set(vanity_key, target)
   end
@@ -39,9 +39,9 @@ class Vanity
   def destroy
     redis.del(vanity_key)
     AuditEntry.create!(change_type: "remove_vanity",
-                       key: vanity_key,
-                       from_value: target,
-                       user_id: Thread.current[:user_id])
+      key: vanity_key,
+      from_value: target,
+      user_id: Thread.current[:user_id])
   end
 
   def self.all
