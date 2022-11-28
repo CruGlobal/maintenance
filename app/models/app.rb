@@ -24,17 +24,17 @@ class App
   def add_dependency(dep)
     redis.sadd(dependencies_key, dep)
     AuditEntry.create!(change_type: "add_dependency",
-                       key: dependencies_key,
-                       to_value: dep,
-                       user_id: Thread.current[:user_id])
+      key: dependencies_key,
+      to_value: dep,
+      user_id: Thread.current[:user_id])
   end
 
   def remove_dependency(dep)
     redis.srem(dependencies_key, dep)
     AuditEntry.create!(change_type: "remove_dependency",
-                       key: dependencies_key,
-                       from_value: dep,
-                       user_id: Thread.current[:user_id])
+      key: dependencies_key,
+      from_value: dep,
+      user_id: Thread.current[:user_id])
   end
 
   def maintenance=(maint)
@@ -42,17 +42,17 @@ class App
       redis.set(maintenance_key, true)
       update_dependencies
       AuditEntry.create!(change_type: "set_maintenance",
-                         key: maintenance_key,
-                         from_value: false,
-                         to_value: true,
-                         user_id: Thread.current[:user_id])
+        key: maintenance_key,
+        from_value: false,
+        to_value: true,
+        user_id: Thread.current[:user_id])
     else
       redis.del(maintenance_key)
       AuditEntry.create!(change_type: "set_maintenance",
-                         key: maintenance_key,
-                         from_value: true,
-                         to_value: false,
-                         user_id: Thread.current[:user_id])
+        key: maintenance_key,
+        from_value: true,
+        to_value: false,
+        user_id: Thread.current[:user_id])
     end
   end
 
@@ -77,17 +77,17 @@ class App
   def add_domain(domain)
     redis.sadd(whitelist_key, domain)
     AuditEntry.create!(change_type: "add_domain",
-                       key: whitelist_key,
-                       to_value: domain,
-                       user_id: Thread.current[:user_id])
+      key: whitelist_key,
+      to_value: domain,
+      user_id: Thread.current[:user_id])
   end
 
   def remove_domain(domain)
     redis.srem(whitelist_key, domain)
     AuditEntry.create!(change_type: "remove_domain",
-                       key: whitelist_key,
-                       from_value: domain,
-                       user_id: Thread.current[:user_id])
+      key: whitelist_key,
+      from_value: domain,
+      user_id: Thread.current[:user_id])
   end
 
   private
