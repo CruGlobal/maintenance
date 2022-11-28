@@ -3,8 +3,8 @@
 class Upstream
   attr_reader :pattern, :target, :redis
 
-  TARGETS = {'WordPress': "WP_ADDR",
-             'Cru.org (Default)': "DEFAULT_PROXY_TARGET",}.freeze
+  TARGETS = {WordPress: "WP_ADDR",
+             "Cru.org (Default)": "DEFAULT_PROXY_TARGET"}.freeze
 
   def initialize(pattern, target = nil)
     @redis = redis || Redis.current
@@ -25,16 +25,16 @@ class Upstream
   def save
     unless @existing_target
       AuditEntry.create!(change_type: "add_upstream",
-                         key: upstream_key,
-                         to_value: target,
-                         user_id: Thread.current[:user_id])
+        key: upstream_key,
+        to_value: target,
+        user_id: Thread.current[:user_id])
     end
     if @existing_target && target != @existing_target
       AuditEntry.create!(change_type: "update_upstream",
-                         key: upstream_key,
-                         from_value: @existing_target,
-                         to_value: target,
-                         user_id: Thread.current[:user_id])
+        key: upstream_key,
+        from_value: @existing_target,
+        to_value: target,
+        user_id: Thread.current[:user_id])
     end
     redis.hset(upstream_key, pattern, target)
   end
@@ -42,9 +42,9 @@ class Upstream
   def destroy
     redis.hdel(upstream_key, pattern)
     AuditEntry.create!(change_type: "remove_upstream",
-                       key: upstream_key,
-                       from_value: target,
-                       user_id: Thread.current[:user_id])
+      key: upstream_key,
+      from_value: target,
+      user_id: Thread.current[:user_id])
   end
 
   def self.all
