@@ -75,3 +75,6 @@ gem "lograge"
 gem "ougai", "~> 1.7"
 gem "ddtrace", "~> 1.5"
 gem "dogstatsd-ruby", "~> 5.3"
+
+# Temporary security fix until new Ruby release
+gem "uri", "~> 0.10.3"
