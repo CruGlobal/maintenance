@@ -29,8 +29,5 @@ jobs:
       - name: StandardRB
         run: bundle exec standardrb --format simple
 
-      - name: Install yarn dependencies
-        run: yarn --ignore-engines
-
-      - name: Yarn audit
-        run: yarn run improved-yarn-audit --ignore-dev-deps
+      - name: JavaScript Audit
+        run: bin/importmap audit

@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     id_token = session[:id_token]
     session.clear
     if id_token.present?
-      redirect_to "#{ENV.fetch("OKTA_ISSUER")}/v1/logout?id_token_hint=#{id_token}&post_logout_redirect_uri=#{request.base_url}"
+      redirect_to "#{ENV.fetch("OKTA_ISSUER")}/v1/logout?id_token_hint=#{id_token}&post_logout_redirect_uri=#{request.base_url}", allow_other_host: true
     else
       redirect_to root_path
     end
