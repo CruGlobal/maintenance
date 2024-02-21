@@ -57,6 +57,8 @@
       // Guard against double DOM loads
       var codeExecuted = false;
 
+      // Need to put this behind an event listener because by default browsers will load inline JS
+      // before importing modules via importmaps.
       document.addEventListener('modulesLoaded', function(e) {
         if (!codeExecuted) {
           $(function() {
