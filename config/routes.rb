@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Defines the root path route ("/")
+  root to: "apps#index"
 
   resources :upstreams
   resources :apps, only: %i[index create update destroy]
@@ -16,6 +19,4 @@ Rails.application.routes.draw do
   resource :sessions, only: %i[new destroy]
   get "auth/oktaoauth/callback", to: "sessions#create"
   match "/logout" => "sessions#destroy", :as => :logout, :via => [:get, :post, :delete]
-
-  root to: "apps#index"
 end
