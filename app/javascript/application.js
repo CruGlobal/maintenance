@@ -3,7 +3,7 @@ import "jquery"
 import "bootstrap"
 import "chosen-js"
 import "tether"
-import "./validations.js"
+import "validations"
 
 var event = new CustomEvent("modulesLoaded");
 document.dispatchEvent(event);
