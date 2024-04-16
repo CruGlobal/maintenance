@@ -5,7 +5,7 @@ class Upstream
 
   TARGETS = {"Cru WordPress": "WP_ADDR",
              "WordPress VIP": "VIP_ADDR",
-             "Storylines": "STORYLINES_ADDR",
+             Storylines: "STORYLINES_ADDR",
              "Cru.org (Default)": "DEFAULT_PROXY_TARGET"}.freeze
 
   def initialize(pattern, target = nil)
