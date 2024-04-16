@@ -82,6 +82,7 @@ gem "omniauth-rails_csrf_protection"
 gem "ougai", "~> 1.7"
 gem "parser"
 gem "pg"
+gem "rdoc", "~> 6.3.4"
 gem "redis", "~> 4.0"
 gem "rubocop"
 gem "sdoc", group: :doc
