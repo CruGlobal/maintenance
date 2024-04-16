@@ -3,7 +3,9 @@
 class Upstream
   attr_reader :pattern, :target, :redis
 
-  TARGETS = {WordPress: "WP_ADDR",
+  TARGETS = {"Cru WordPress": "WP_ADDR",
+             "WordPress VIP": "VIP_ADDR",
+             "Storylines": "STORYLINES_ADDR",
              "Cru.org (Default)": "DEFAULT_PROXY_TARGET"}.freeze
 
   def initialize(pattern, target = nil)
