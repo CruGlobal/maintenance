@@ -79,6 +79,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     base64 (0.2.0)
+    bigdecimal (3.1.7)
     bindex (0.8.1)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
@@ -188,7 +189,8 @@ GEM
       rack (>= 1.2, < 4)
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
-    oj (3.7.12)
+    oj (3.16.3)
+      bigdecimal (>= 3.0)
     omniauth (2.1.2)
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
@@ -352,11 +354,10 @@ DEPENDENCIES
   standard
   turbo-rails
   tzinfo-data
-  uri (~> 0.10.3)
   web-console
 
 RUBY VERSION
-   ruby 3.1.4p223
+   ruby 3.1.5p252
 
 BUNDLED WITH
    2.3.11
